@@ -1,0 +1,17 @@
+<script src="lib/emergency-kit.js"></script>
+
+<script>
+var k = new EmergencyKit({
+    email: "mitch.cohen@me.com",
+    name: "Mitchell Cohen",
+    accountKey: "AK-123-456",
+    domain: "gatitos",
+    teamURL: "gatitos.1password.com",
+    dataURL: "blah",
+    filename: "1password.pdf"
+});
+k.getDownloadURL().then(function(url) {
+    console.log('yo');
+    document.write("<a target='_blank' href='" + url + "'>View PDF</a>");
+});
+</script>
