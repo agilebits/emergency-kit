@@ -8,13 +8,14 @@
     "babelify": "^7.2.0",
     "blob-stream": "^0.1.3",
     "brfs": "^1.4.3",
-    "moment": "^2.11.1",
+    "moment": "^2.11.2",
     "pdfkit": "^0.7.2"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "browserify": "browserify index.js -t brfs -t [ babelify --presets [ es2015 ] ] -o ./lib/emergency-kit.js"
+    "browserify": "browserify index.js -t brfs -t [ babelify --presets [ es2015 ] ] -o ./lib/emergency-kit.js",
+    "minify": "uglify -s ./lib/emergency-kit.js -o ./lib/emergency-kit.min.js"
   },
   "repository": {
     "type": "git",

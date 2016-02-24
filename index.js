@@ -123,7 +123,7 @@ function render(kit) {
     doc
         .fontSize(16)
         .fillColor(OP_DARK_RED)
-        .text("SIGN IN DETAILS", LEFT_MARGIN, 318, {align: "center"})
+        .text("SIGN IN DETAILS", 0, 318, {align: "center"})
         .fontSize(9)
         .fillColor("#333")
         .text("ACCOUNT URL", LEFT_MARGIN + 28, 342)
@@ -138,9 +138,9 @@ function render(kit) {
       .text(
         "Once you fill in your Master Password, the details below can be used " +
         "to sign in to your 1Password account in an emergency.",
-        37, 159, {width: MAX_WIDTH, lineGap: 2}
+        37, 173, {width: MAX_WIDTH, lineGap: 2}
       )
-      .moveDown(1.5)
+      .moveDown(1)
       .text("1. Print out this document (and/or put it on a USB key or external drive).")
       .moveDown(0.5)
       .text("2. Fill in your Master Password below.")
@@ -171,6 +171,12 @@ function render(kit) {
         );
 
     // User input
+    doc
+      .fontSize(13)
+      .fillColor(OP_DARK_RED)
+      .text(`Created for ${kit.name} on ${moment().format('MMMM Do YYYY')}`, 0, 134,
+        {align: "center"}
+      );
     // Account URL
     doc
         .fontSize(14)
