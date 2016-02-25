@@ -10,6 +10,7 @@ You can generate Emergency Kits two ways: from a node app, or in a browser or we
 
 The Emergency Kit takes advantage of ES6 features. Use the most recent versions of node.
 
+javascript
 ```
 "use strict";
 
@@ -32,6 +33,7 @@ k.toDisk(); // Will produce "1password.pdf" in the active directory
 
 Run `npm install` and `npm run browserify` to generate the browser library.
 
+html
  ```
 <script src="/lib/emergency-kit.js"></script>
 
