@@ -1,6 +1,6 @@
 {
   "name": "emergency-kit",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "description": "The 1Password for Teams Emergency Kit",
   "main": "index.js",
   "dependencies": {

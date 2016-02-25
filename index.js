@@ -1,7 +1,7 @@
 "use strict";
 
 /* 1Password Emergency Kit
- * 2.0.0
+ * 2.0.1
  * Author: Mitchell Cohen
 */
 
@@ -148,8 +148,7 @@ class EmergencyKit {
         this.domain = options.domain;
         this.teamURL = options.teamURL;
         this.qrCode = options.qrCode || null;
-        this.filename = options.filename || `1Password Emergency Kit-${domain}`;
-        this._downloadURL = null;
+        this.filename = options.filename || `1Password Emergency Kit-${this.domain}`;
     }
 
     template() {
@@ -177,10 +176,6 @@ class EmergencyKit {
 
     getDownloadURL() {
         return new Promise((fulfill, reject) => {
-            if (this._downloadURL) {
-                fulfill(this._downloadURL);
-                return;
-            }
             let doc;
 
             doc = this.render([
@@ -193,9 +188,9 @@ class EmergencyKit {
             stream.on("finish", () => {
                 let end = Date.now();
                 let emergencyKitURL= stream.toBlobURL('application/pdf');
-
+                let emergencyKitBlob = stream.toBlob('application/pdf');
                 console.log("Emergency Kit rendered in " + (end - start) + " ms.");
-                fulfill(emergencyKitURL);
+                fulfill(emergencyKitURL, emergencyKitBlob);
             });
             doc.end();
         });
