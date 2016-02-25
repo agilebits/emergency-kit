@@ -1,0 +1,65 @@
+<script src="lib/qrcode.min.js"></script>
+<script src="lib/emergency-kit.js"></script>
+
+<body>
+<form>
+    <label>Generate EK for:</label>
+    <input id="person" type="text"></input>
+    <button type="button" id="generate">Go!</button>
+</form>
+
+<p id="pdf"></p>
+
+</body>
+
+
+<script>
+
+var pdf = document.getElementById("pdf");
+
+function getQRCodeDataURL(url, opts) {
+    var settings = opts;
+    settings.text = url;
+    settings.correctLevel = 1;
+
+    // Must render to a div before extracting the URL
+    var qr = new QRCode(document.createElement("div"), settings);
+    var data = qr._el.querySelector("canvas").toDataURL();
+    return data;
+}
+
+function generateEK(person) {
+    var k = new EmergencyKit({
+        email: "wendyappleseed@me.com",
+        name: person,
+        accountKey: "AK-123-456",
+        domain: "appleseed",
+        teamURL: "appleseed.1password.com",
+        qrCode: getQRCodeDataURL("hello world", {
+               colorDark: "#000",
+               colorLight: "#fff",
+               width: 144,
+               height: 144
+        }),
+        filename: "1password.pdf"
+    });
+
+    k.getDownloadURL().then(function(url) {
+        pdf.innerHTML = "<a target='_blank' href='" + url + "'>View PDF</a>";
+    });
+}
+
+function submitForm() {
+    var person = document.getElementById("person").value;
+    generateEK(person);
+}
+
+var button = document.getElementById("generate");
+
+document.body.addEventListener("submit", function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    submitForm();
+})
+button.addEventListener("click", submitForm);
+</script>
