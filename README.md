@@ -14,19 +14,23 @@ The Emergency Kit takes advantage of ES6 features. Use the most recent versions 
 ```javascript
 "use strict";
 
-const EmergencyKit = require("./index.js");
+let emergencyKit = require("./lib/emergency-kit-node.js");
+let filename = "1Password.pdf";
 
-let k = new EmergencyKit({
+let k = emergencyKit({
     email: "wendyappleseed@me.com",
     name: "Wendy Appleseed",
     accountKey: "AK-123-456",
     domain: "appleseed",
     teamURL: "appleseed.1password.com",
-    filename: "1password.pdf"
     //qrCode: image-data
 });
 
-k.toDisk(); // Will produce "1password.pdf" in the active directory
+let start = Date.now();
+k.toFile(filename).on("finish", () => {
+    let end = Date.now();
+    console.log("Emergency Kit rendered in " + (end - start) + " ms.");
+});
 ```
 
 ### Browser or web view
@@ -38,18 +42,19 @@ Run `npm install` and `npm run browserify` to generate the browser library.
 <script src="/lib/emergency-kit.js"></script>
 
 <script>
-var k = new EmergencyKit({
+var k = emergencyKit({
     email: "wendyappleseed@me.com",
     name: "Wendy Appleseed",
     accountKey: "AK-123-456",
     domain: "my-domain",
     teamURL: "my-domain.1password.com",
-    filename: "1password.pdf"
     //qrCode: image-data
 });
 
-k.getDownloadURL().then(function(url) {
-    console.log('yo');
+let start = Date.now();
+k.toURL().then(function(url) {
+    let end = Date.now();
+    console.log("Emergency Kit rendered in " + (end - start) + " ms.");
     document.write("<a target='_blank' href='" + url + "'>Download PDF</a>");
 });
 </script>

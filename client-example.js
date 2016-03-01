@@ -1,15 +1,19 @@
 "use strict";
 
-const EmergencyKit = require("./index.js");
+let emergencyKit = require("./lib/emergency-kit-node.js");
+let filename = "1Password.pdf";
 
-let k = new EmergencyKit({
+let k = emergencyKit({
     email: "wendyappleseed@me.com",
-    name: "Wendy Applésçeeødüß",
+    name: "Wendy Appleseed",
     accountKey: "AK-123-456",
     domain: "appleseed",
     teamURL: "appleseed.1password.com",
-    filename: "1password.pdf"
     //qrCode: image-data
 });
 
-k.toDisk(); // Will produce "1password.pdf" in the active directory
+let start = Date.now();
+k.toFile(filename).on("finish", () => {
+    let end = Date.now();
+    console.log("Emergency Kit rendered in " + (end - start) + " ms.");
+});

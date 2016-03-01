@@ -29,7 +29,7 @@ function getQRCodeDataURL(url, opts) {
 }
 
 function generateEK(person) {
-    var k = new EmergencyKit({
+    var k = emergencyKit({
         email: "wendyappleseed@me.com",
         name: person,
         accountKey: "AK-123-456",
@@ -44,7 +44,10 @@ function generateEK(person) {
         filename: "1password.pdf"
     });
 
-    k.getDownloadURL().then(function(url) {
+    var start = Date.now();
+    k.toURL().then(function(url) {
+        var end = Date.now();
+        console.log("Emergency Kit rendered in "+ (end - start) + " ms.");
         pdf.innerHTML = "<a target='_blank' href='" + url + "'>View PDF</a>";
     });
 }

@@ -1,21 +1,28 @@
 {
   "name": "emergency-kit",
-  "version": "2.0.1",
-  "description": "The 1Password for Teams Emergency Kit",
-  "main": "index.js",
+  "version": "2.1.0",
+  "description": "The 1Password Emergency Kit",
+  "main": "lib/emergency-kit-node.js",
   "dependencies": {
+    "babel-cli": "^6.5.1",
     "babel-preset-es2015": "^6.3.13",
     "babelify": "^7.2.0",
-    "blob-stream": "^0.1.3",
     "brfs": "^1.4.3",
+    "browser-run": "^3.0.8",
+    "browserify": "^13.0.0",
     "moment": "^2.11.2",
-    "pdfkit": "^0.7.2"
+    "pdfkit": "^0.7.2",
+    "tape": "^4.4.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "browserify": "browserify index.js -t brfs -t [ babelify --presets [ es2015 ] ] -o ./lib/emergency-kit.js",
-    "minify": "uglify -s ./lib/emergency-kit.js -o ./lib/emergency-kit.min.js"
+    "test-browser": "browserify tests/test-browser.js -t brfs -t [ babelify --presets [ es2015 ] ] | $(npm bin)/browser-run -p 2222",
+    "test-node": "node tests/test-node.js",
+    "test": "npm run test-node && npm run test-browser",
+    "browserify": "browserify src/emergency-kit.js -t brfs -t [ babelify --presets [ es2015 ] ] -o ./lib/emergency-kit.js",
+    "minify": "uglify -s ./lib/emergency-kit.js -o ./lib/emergency-kit.min.js",
+    "build": "$(npm bin)/babel ./src/emergency-kit.js --out-file ./lib/emergency-kit-node.js",
+    "shipit": "npm run build && npm run browserify && npm run minify"
   },
   "repository": {
     "type": "git",

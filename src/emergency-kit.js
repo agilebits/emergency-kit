@@ -1,7 +1,7 @@
 "use strict";
 
 /* 1Password Emergency Kit
- * 2.0.1
+ * 2.1.0
  * Author: Mitchell Cohen
 */
 
@@ -22,7 +22,7 @@ const RIGHT_MARGIN = 36;
 const MAX_WIDTH = 540;
 
 let PDFDocument = require("pdfkit");
-let blobStream = require("blob-stream");
+let stream = require("stream");
 let moment = require("moment");
 let fs = require("fs");
 
@@ -65,7 +65,7 @@ let draw = {
         doc
             .fontSize(16)
             .fillColor(OP_DARK_RED)
-            .text("SIGN IN DETAILS", 0, 314, {align: "center"})
+            .text("SIGN IN DETAILS", 0, 318, {align: "center"})
             .fontSize(10)
             .fillColor("#333")
             .text("ACCOUNT URL", LEFT_MARGIN + 28, 342)
@@ -140,79 +140,106 @@ let draw = {
     }
 };
 
+
+function createUint8ArrayStream() {
+    return new stream.Transform({
+        transform: function (chunk, encoding, next) {
+            if (!(chunk instanceof Uint8Array)) chunk = new Uint8Array(chunk);
+            this.push(chunk);
+            next();
+        },
+        flush: function (done) {
+            done();
+        }
+    })
+}
+
+function blobFromUint8ArrayStream(stream, {type = 'application/octet-stream'}) {
+    let buffer = [];
+    return new Promise( (fulfill) => {
+        stream.on("data", function (n) {
+            buffer.push(n);
+        }).on("finish", function (n) {
+            fulfill(new Blob(buffer, {type}));
+        })
+    });
+}
+
+function render(kit, drawFuncs) {
+    let doc = new PDFDocument({
+        margin: 0,
+        size: "letter"
+    });
+
+    drawFuncs.forEach((drawFunc) => {
+        let drawSubComponent = drawFunc.bind(doc);
+        drawSubComponent(kit);
+    });
+    doc.end();
+    return doc;
+}
+
+function emergencyKitTemplate({email, name, accountKey, domain, teamURL, qrCode = null}) {
+    return {
+        version: EMERGENCY_KIT_VERSION,
+        createdAt: moment().format("MMMM Do, YYYY"),
+        email,
+        name,
+        teamURL,
+        domain,
+        accountKey,
+        qrCode
+    };
+}
+
 class EmergencyKit {
-    constructor(options) {
-        this.email = options.email;
-        this.name = options.name;
-        this.accountKey = options.accountKey;
-        this.domain = options.domain;
-        this.teamURL = options.teamURL;
-        this.qrCode = options.qrCode || null;
-        this.filename = options.filename || `1Password Emergency Kit-${this.domain}`;
+    constructor(template) {
+        this.template = template;
+        this.filename = `1Password Emergency Kit-${this.template.domain}.pdf`;
     }
 
-    template() {
-        return {
-            version: EMERGENCY_KIT_VERSION,
-            email: this.email,
-            name: this.name,
-            teamURL: this.teamURL,
-            domain: this.domain,
-            accountKey: this.accountKey,
-            createdAt: moment().format("MMMM Do, YYYY"),
-            qrCode: this.qrCode
-        };
-    }
-
-    toDisk() {
-        let doc;
-        doc = this.render([
+    _generate(stream) {
+        return render(this.template, [
           draw.prettyGraphics
-        ]);
-
-        doc.pipe(fs.createWriteStream(this.filename));
-        doc.end();
+        ]).pipe(stream);
     }
 
-    getDownloadURL() {
-        return new Promise((fulfill, reject) => {
-            let doc;
-
-            doc = this.render([
-              draw.prettyGraphics
-            ]);
-
-            let stream = doc.pipe(blobStream());
-
-            let start = Date.now();
-            stream.on("finish", () => {
-                let end = Date.now();
-                let emergencyKitURL= stream.toBlobURL('application/pdf');
-                let emergencyKitBlob = stream.toBlob('application/pdf');
-                console.log("Emergency Kit rendered in " + (end - start) + " ms.");
-                fulfill(emergencyKitURL, emergencyKitBlob);
-            });
-            doc.end();
-        });
+    pipe(stream) {
+        return this._generate(stream);
     }
 
-    render(drawFuncs) {
-        let kit = this.template();
-        let doc = new PDFDocument({
-            margin: 0,
-            size: "letter"
-        });
+    _toUint8() {
+        return this.pipe(createUint8ArrayStream());
+    }
 
-        drawFuncs.forEach((drawFunc) => {
-            let drawSubComponent = drawFunc.bind(doc);
-            drawSubComponent(kit);
-        });
-        return doc;
+    toFile(filename = this.filename) {
+        return this.pipe(fs.createWriteStream(filename));
+    }
+
+    toBlob() {
+        if (typeof Blob === 'undefined') {
+            throw new Error("No Blob object found. Are you running in node?");
+        }
+
+        return blobFromUint8ArrayStream(this._toUint8(), {type: "application/pdf"});
+    }
+
+    // Convenience method for browsers
+    toURL() {
+        if (typeof URL === 'undefined') {
+            return new Error("No URL object found. Are you running in node?");
+        }
+
+        return this.toBlob().then( (blob) => URL.createObjectURL(blob) );
     }
 }
 
+function emergencyKit(config) {
+    return new EmergencyKit(emergencyKitTemplate(config));
+}
+
 if (typeof window !== 'undefined') {
-    window.EmergencyKit = EmergencyKit;
+    window.emergencyKit = emergencyKit;
 } else {
-    module.exports = EmergencyKit;
+    module.exports = emergencyKit;
 }
