@@ -8,7 +8,7 @@ You can generate Emergency Kits two ways: from a node app, or in a browser or we
 
 ### node (native client)
 
-The Emergency Kit takes advantage of ES6 features. Use the most recent versions of node.
+The Emergency Kit takes full advantage of ES6. Use the most recent version of node.
 
 
 ```javascript
@@ -51,9 +51,9 @@ var k = emergencyKit({
     //qrCode: image-data
 });
 
-let start = Date.now();
+var start = Date.now();
 k.toURL().then(function(url) {
-    let end = Date.now();
+    var end = Date.now();
     console.log("Emergency Kit rendered in " + (end - start) + " ms.");
     document.write("<a target='_blank' href='" + url + "'>Download PDF</a>");
 });
