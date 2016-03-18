@@ -35,9 +35,7 @@ function runBlobTests(blob) {
     });
 
     test("Blob is of type 'application/pdf'.", (assert) => {
-            let expected = referenceBlob.type === 'application/pdf';
-            let actual = blob.type === 'application/pdf';
-            assert.equal(expected, actual, blob.type);
+            assert.equal(blob.type, referenceBlob.type, blob.type);
             assert.end();
     });
 }
