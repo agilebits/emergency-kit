@@ -62,10 +62,10 @@ function prettyGraphics(kit) {
     doc
         .fontSize(16)
         .fillColor(OP_DARK_RED)
-        .text("SIGN IN DETAILS", 0, 318, {align: "center"})
+        .text("1Password Account", 0, 318, {align: "center"})
         .fontSize(10)
         .fillColor("#333")
-        .text("WEB ADDRESS", LEFT_MARGIN + 28, 342)
+        .text("SIGN-IN ADDRESS", LEFT_MARGIN + 28, 342)
         .text("EMAIL ADDRESS", LEFT_MARGIN + 28, 398)
         .text("ACCOUNT KEY", LEFT_MARGIN + 28, 454)
         .text("MASTER PASSWORD", LEFT_MARGIN + 28, 510);
