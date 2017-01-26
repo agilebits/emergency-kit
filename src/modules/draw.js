@@ -20,11 +20,11 @@ const RIGHT_MARGIN = 36;
 const MAX_WIDTH = 540;
 
 function loadAssetsSync() {
-    let header = fs.readFileSync('images/header@3x.png');
-    let pencil = fs.readFileSync('images/pencil@3x.png');
-    let ak = fs.readFileSync('images/ak-icon@3x.png');
-    let mp = fs.readFileSync('images/mp-icon@3x.png');
-    let proxima = fs.readFileSync('font/proxima-nova-regular.ttf');
+    let header = fs.readFileSync(__dirname + '/../../images/header@3x.png');
+    let pencil = fs.readFileSync(__dirname + '/../../images/pencil@3x.png');
+    let ak = fs.readFileSync(__dirname + '/../../images/ak-icon@3x.png');
+    let mp = fs.readFileSync(__dirname + '/../../images/mp-icon@3x.png');
+    let proxima = fs.readFileSync(__dirname + '/../../font/proxima-nova-regular.ttf');
     return {header, pencil, ak, mp, proxima};
 }
 
