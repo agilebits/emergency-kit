@@ -3,6 +3,7 @@
   "version": "2.2.2",
   "description": "The 1Password Emergency Kit",
   "main": "lib/emergency-kit-node.js",
+  "typings": "lib/d/emergency-kit.d.ts",
   "dependencies": {
     "moment": "^2.11.2",
     "pdfkit": "^0.7.2"
@@ -15,14 +16,15 @@
     "brfs": "^1.4.3",
     "browser-run": "^3.0.8",
     "browserify": "^13.0.0",
-    "tape": "^4.4.0"
+    "tape": "^4.4.0",
+    "uglify-js": "^2.7.5"
   },
   "scripts": {
     "test-browser": "browserify tests/test-browser.js -t babelify -t brfs | $(npm bin)/browser-run -b safari",
     "test-node": "node tests/test-node.js",
     "test": "npm run test-node && npm run test-browser",
     "browserify": "browserify src/emergency-kit.js -t babelify -t brfs -o ./lib/emergency-kit.js",
-    "minify": "uglify -s ./lib/emergency-kit.js -o ./lib/emergency-kit.min.js",
+    "minify": "uglifyjs ./lib/emergency-kit.js -o ./lib/emergency-kit.min.js",
     "build-deps": "$(npm bin)/babel ./src/modules --out-dir ./lib/modules",
     "build-ek": "$(npm bin)/babel ./src/emergency-kit.js --out-file ./lib/emergency-kit-node.js",
     "build": "npm run build-deps && npm run build-ek",

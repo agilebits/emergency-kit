@@ -42,10 +42,11 @@ function emergencyKit(config) {
     return new EmergencyKit(emergencyKitTemplate(config));
 }
 
-if (typeof window !== 'undefined') {
-    Object.assign(EmergencyKit.prototype, mixins.WebStream);
-    window.emergencyKit = emergencyKit;
-} else {
+if (typeof exports === 'object') {
     Object.assign(EmergencyKit.prototype, mixins.FileStream);
     module.exports = emergencyKit;
+} else {
+    var root = window || global || root || this;
+    Object.assign(EmergencyKit.prototype, mixins.WebStream);
+    root.emergencyKit = emergencyKit;
 }

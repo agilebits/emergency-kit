@@ -16,4 +16,10 @@ interface EmergencyKitStatic {
     (config: EmergencyKitConfig): EmergencyKit
 }
 
-declare var emergencyKit: EmergencyKitStatic;
+declare namespace _ek {
+    var emergencyKit: EmergencyKitStatic;
+}
+
+declare module "emergency-kit" {
+    export = _ek.emergencyKit;
+}
