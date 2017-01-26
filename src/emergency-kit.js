@@ -43,7 +43,14 @@ function emergencyKit(config) {
 }
 
 if (typeof exports === 'object') {
-    Object.assign(EmergencyKit.prototype, mixins.FileStream);
+    if (typeof Blob !== 'undefined' && typeof URL !== 'undefined') {
+        // Make WebStream available for modules because we might
+        // be using webpack
+        Object.assign(EmergencyKit.prototype, mixins.WebStream);
+    }
+    else {
+        Object.assign(EmergencyKit.prototype, mixins.FileStream);
+    }
     module.exports = exports = emergencyKit;
 } else {
     var root = window || global || root || this;
