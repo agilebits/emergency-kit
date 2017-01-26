@@ -44,7 +44,7 @@ function emergencyKit(config) {
 
 if (typeof exports === 'object') {
     Object.assign(EmergencyKit.prototype, mixins.FileStream);
-    module.exports = emergencyKit;
+    module.exports = exports = emergencyKit;
 } else {
     var root = window || global || root || this;
     Object.assign(EmergencyKit.prototype, mixins.WebStream);
