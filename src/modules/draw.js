@@ -101,7 +101,7 @@ function prettyGraphics(kit) {
         .fillColor("#333")
         .font("Helvetica-Bold")
         .fontSize(14)
-        .text("QR Code", 403, 610)
+        .text("Account code", 403, 610)
         .moveDown(1)
         .font("proxima")
         .text(
@@ -132,7 +132,7 @@ function prettyGraphics(kit) {
         .fontSize(14)
         .fillColor("#333")
         .text(kit.accountKey, LEFT_MARGIN + 28, 481);
-    // QR code
+    // Account code
     if (kit.qrCode) doc.image(kit.qrCode, 234, 612, 144, 144);
 }
 
