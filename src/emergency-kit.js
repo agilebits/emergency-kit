@@ -52,8 +52,16 @@ if (typeof exports === 'object') {
         Object.assign(EmergencyKit.prototype, mixins.FileStream);
     }
     module.exports = exports = emergencyKit;
-} else {
-    var root = window || global || root || this;
+}
+
+var root = (
+    (typeof window !== 'undefined' && window) ||
+    (typeof global !== 'undefined' && global) ||
+    (typeof root !== 'undefined' && root) ||
+    (typeof this !== 'undefined' && this)
+);
+
+if (typeof root !== 'undefined') {
     Object.assign(EmergencyKit.prototype, mixins.WebStream);
     root.emergencyKit = emergencyKit;
 }
