@@ -16,6 +16,7 @@
     "brfs": "^1.4.3",
     "browser-run": "^3.0.8",
     "browserify": "^13.0.0",
+    "electron": "^1.4.15",
     "tape": "^4.4.0",
     "uglify-js": "^2.7.5"
   },
