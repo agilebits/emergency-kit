@@ -1,6 +1,6 @@
 {
   "name": "emergency-kit",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "The 1Password Emergency Kit",
   "main": "lib/emergency-kit-node.js",
   "typings": "lib/d/emergency-kit.d.ts",
