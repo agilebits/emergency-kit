@@ -101,11 +101,11 @@ function prettyGraphics(kit) {
         .fillColor("#333")
         .font("Helvetica-Bold")
         .fontSize(14)
-        .text("Account code", 403, 610)
+        .text("Setup code", 403, 610)
         .moveDown(1)
         .font(proxima)
         .text(
-          "Scan this code from the 1Password apps to set up your account quickly and easily.",
+          "Scan this code when setting up 1Password to add your account quickly and easily.",
           {width: 174}
         );
 
