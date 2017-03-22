@@ -6,7 +6,7 @@ let filename = "1Password.pdf";
 let k = emergencyKit({
     email: "holmes@agilebits.com",
     name: "Sherlock Holmes",
-    accountKey: "A3-R69SQK-TZ9KPW-8MXYD-6W373-V7GHJ-EDJQW",
+    accountKey: "A3-FSHJNM-7T85AC-KRSBV-VC83W-7NTCN-457SS",
     domain: "bakerstreet",
     teamURL: "bakerstreet.1password.com",
     //qrCode: image-data

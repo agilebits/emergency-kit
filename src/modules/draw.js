@@ -67,7 +67,7 @@ function prettyGraphics(kit) {
         .fillColor("#333")
         .text("SIGN-IN ADDRESS", LEFT_MARGIN + 28, 342)
         .text("EMAIL ADDRESS", LEFT_MARGIN + 28, 398)
-        .text("SECRET KEY", LEFT_MARGIN + 28, 454)
+        .text("ACCOUNT KEY", LEFT_MARGIN + 28, 454)
         .text("MASTER PASSWORD", LEFT_MARGIN + 28, 510);
 
     // Documentation
@@ -92,7 +92,7 @@ function prettyGraphics(kit) {
         .fontSize(14)
         .text("Need help?", 36, 610)
         .moveDown(1)
-        .font(proxima)
+        .font("proxima")
         .text("Contact AgileBits at:")
         .fillColor(OP_DARK_RED)
         .text("support@1password.com");
@@ -101,11 +101,11 @@ function prettyGraphics(kit) {
         .fillColor("#333")
         .font("Helvetica-Bold")
         .fontSize(14)
-        .text("Setup code", 403, 610)
+        .text("Account code", 403, 610)
         .moveDown(1)
-        .font(proxima)
+        .font("proxima")
         .text(
-          "Scan this code when setting up 1Password to add your account quickly and easily.",
+          "Scan this code from the 1Password apps to set up your account quickly and easily.",
           {width: 174}
         );
 
