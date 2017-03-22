@@ -67,7 +67,7 @@ function prettyGraphics(kit) {
         .fillColor("#333")
         .text("SIGN-IN ADDRESS", LEFT_MARGIN + 28, 342)
         .text("EMAIL ADDRESS", LEFT_MARGIN + 28, 398)
-        .text("ACCOUNT KEY", LEFT_MARGIN + 28, 454)
+        .text("SECRET KEY", LEFT_MARGIN + 28, 454)
         .text("MASTER PASSWORD", LEFT_MARGIN + 28, 510);
 
     // Documentation
@@ -101,7 +101,7 @@ function prettyGraphics(kit) {
         .fillColor("#333")
         .font("Helvetica-Bold")
         .fontSize(14)
-        .text("Account code", 403, 610)
+        .text("Setup code", 403, 610)
         .moveDown(1)
         .font("proxima")
         .text(
@@ -126,13 +126,13 @@ function prettyGraphics(kit) {
         .fontSize(14)
         .fillColor("#333")
         .text(kit.email, LEFT_MARGIN + 28, 425);
-    // Account Key
+    // Secret Key
     doc
         .font("Courier")
         .fontSize(14)
         .fillColor("#333")
         .text(kit.accountKey, LEFT_MARGIN + 28, 481);
-    // Account code
+    // Setup code
     if (kit.qrCode) doc.image(kit.qrCode, 234, 612, 144, 144);
 }
 
