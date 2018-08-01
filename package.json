@@ -33,11 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AgileBits/emergency-kit.git"
+    "url": "git+https://github.com/agilebits/emergency-kit.git"
   },
   "author": "",
   "bugs": {
-    "url": "https://github.com/AgileBits/emergency-kit/issues"
+    "url": "https://github.com/agilebits/emergency-kit/issues"
   },
-  "homepage": "https://github.com/AgileBits/emergency-kit#readme"
+  "homepage": "https://github.com/agilebits/emergency-kit#readme",
+  "license": "MIT"
 }
