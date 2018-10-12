@@ -158,7 +158,7 @@ function render(kit, drawFuncs) {
 }
 
 function onepasswordURL(kit) {
-    return "onepassword://team-account/add?email=" + encodeURI(kit.email) + "&key=" + encodeURI(kit.accountKey) + "&server=https://" + encodeURI(kit.teamURL);
+    return "onepassword://team-account/add?email=" + encodeURI(kit.email) + "&key=" + encodeURI(kit.accountKey) + "&server=" + encodeURI(kit.teamURL);
 }
 
 function draw(kit) {
