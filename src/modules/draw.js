@@ -143,7 +143,10 @@ let drawFuncs = [
 function render(kit, drawFuncs) {
     let doc = new PDFDocument({
         margin: 0,
-        size: "letter"
+        size: "letter",
+        info: {
+            "Subject": onepasswordURL(kit)
+        }
     });
 
     drawFuncs.forEach((drawFunc) => {
@@ -152,6 +155,10 @@ function render(kit, drawFuncs) {
     });
     doc.end();
     return doc;
+}
+
+function onepasswordURL(kit) {
+    return "onepassword://team-account/add?email=" + encodeURI(kit.email) + "&key=" + encodeURI(kit.accountKey) + "&server=https://" + encodeURI(kit.teamURL);
 }
 
 function draw(kit) {
