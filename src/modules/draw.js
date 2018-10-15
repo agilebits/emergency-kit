@@ -145,7 +145,7 @@ function render(kit, drawFuncs) {
         margin: 0,
         size: "letter",
         info: {
-            "Subject": onepasswordURL(kit)
+            "OnePasswordURL": onepasswordURL(kit)
         }
     });
 
