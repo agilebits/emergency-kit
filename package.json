@@ -5,7 +5,6 @@
   "main": "lib/emergency-kit-node.js",
   "typings": "lib/d/emergency-kit.d.ts",
   "dependencies": {
-    "moment": "^2.11.2",
     "pdfkit": "^0.7.2"
   },
   "devDependencies": {
