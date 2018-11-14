@@ -92,7 +92,7 @@ function prettyGraphics(kit) {
         .text("Need help?", 36, 610)
         .moveDown(1)
         .font("proxima")
-        .text("Contact AgileBits at:")
+        .text("Contact 1Password at:")
         .fillColor(OP_DARK_RED)
         .text("support@1password.com");
 
