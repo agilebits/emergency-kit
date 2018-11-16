@@ -1,7 +1,6 @@
 "use strict";
 
 import PDFDocument from "pdfkit";
-import moment from "moment";
 
 let fs = require("fs");
 
@@ -113,7 +112,7 @@ function prettyGraphics(kit) {
     doc
         .fontSize(13)
         .fillColor(OP_DARK_RED)
-        .text(`Created for ${kit.name} on ${moment().format('MMMM Do, YYYY')}.`, 0, 128,
+        .text(`Created for ${kit.name} on ${(new Date()).toLocaleDateString()}.`, 0, 128,
           {align: "center"}
         );
     // Account URL

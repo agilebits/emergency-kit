@@ -7,14 +7,13 @@
 
 const EMERGENCY_KIT_VERSION = "V2";
 
-import moment from "moment";
 import createPDFDocument from "./modules/draw.js";
 import mixins from "./modules/mixins.js";
 
 function emergencyKitTemplate({email, name, accountKey, domain, teamURL, qrCode = null}) {
     return {
         version: EMERGENCY_KIT_VERSION,
-        createdAt: moment().format("MMMM Do, YYYY"),
+        createdAt: (new Date()).toLocaleDateString(),
         email,
         name,
         teamURL,
