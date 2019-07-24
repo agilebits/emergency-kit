@@ -21,7 +21,7 @@
     "uglify-js": "^3.6.0"
   },
   "scripts": {
-    "test-browser": "browserify tests/test-browser.js -t babelify -t brfs | $(npm bin)/browser-run -b safari",
+    "test-browser": "(cat ./lib/emergency-kit.min.js; browserify tests/test-browser.js -t babelify) | browser-run",
     "test-node": "node tests/test-node.js",
     "test": "npm run test-node && npm run test-browser",
     "browserify": "browserify src/emergency-kit.js -t babelify -t brfs -s emergencyKit -o ./lib/emergency-kit.js",
