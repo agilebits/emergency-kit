@@ -1,7 +1,7 @@
 "use strict";
 
 /* 1Password Emergency Kit
- * 2.2.1
+ * 2.4.0
  * Author: Mitchell Cohen
 */
 
