@@ -24,7 +24,7 @@
     "test-browser": "browserify tests/test-browser.js -t babelify -t brfs | $(npm bin)/browser-run -b safari",
     "test-node": "node tests/test-node.js",
     "test": "npm run test-node && npm run test-browser",
-    "browserify": "browserify src/emergency-kit.js -t babelify -t brfs -o ./lib/emergency-kit.js",
+    "browserify": "browserify src/emergency-kit.js -t babelify -t brfs -s emergencyKit -o ./lib/emergency-kit.js",
     "minify": "uglifyjs ./lib/emergency-kit.js -o ./lib/emergency-kit.min.js",
     "build-deps": "$(npm bin)/babel ./src/modules --out-dir ./lib/modules",
     "build-ek": "$(npm bin)/babel ./src/emergency-kit.js --out-file ./lib/emergency-kit-node.js",
