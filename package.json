@@ -9,16 +9,16 @@
     "pdfkit": "^0.7.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.5.1",
-    "babel-plugin-transform-object-assign": "^6.5.0",
-    "babel-preset-es2015": "^6.3.13",
-    "babelify": "^7.2.0",
-    "brfs": "^1.4.3",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babelify": "^10.0.0",
+    "brfs": "^2.0.2",
     "browser-run": "^6.0.0",
-    "browserify": "^13.0.0",
-    "electron": "^1.4.15",
-    "tape": "^4.4.0",
-    "uglify-js": "^2.7.5"
+    "browserify": "^16.3.0",
+    "tape": "^4.11.0",
+    "uglify-js": "^3.6.0"
   },
   "scripts": {
     "test-browser": "browserify tests/test-browser.js -t babelify -t brfs | $(npm bin)/browser-run -b safari",
