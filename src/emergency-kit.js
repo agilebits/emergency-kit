@@ -1,7 +1,7 @@
 "use strict";
 
 /* 1Password Emergency Kit
- * 2.2.1
+ * 2.4.0
  * Author: Mitchell Cohen
 */
 
@@ -37,30 +37,15 @@ class EmergencyKit {
     }
 }
 
-function emergencyKit(config) {
+if (typeof Blob !== 'undefined' && typeof URL !== 'undefined') {
+    Object.assign(EmergencyKit.prototype, mixins.WebStream);
+}
+else {
+    Object.assign(EmergencyKit.prototype, mixins.FileStream);
+}
+
+export const create = (config) => {
     return new EmergencyKit(emergencyKitTemplate(config));
 }
 
-if (typeof exports === 'object') {
-    if (typeof Blob !== 'undefined' && typeof URL !== 'undefined') {
-        // Make WebStream available for modules because we might
-        // be using webpack
-        Object.assign(EmergencyKit.prototype, mixins.WebStream);
-    }
-    else {
-        Object.assign(EmergencyKit.prototype, mixins.FileStream);
-    }
-    module.exports = exports = emergencyKit;
-}
-
-var root = (
-    (typeof window !== 'undefined' && window) ||
-    (typeof global !== 'undefined' && global) ||
-    (typeof root !== 'undefined' && root) ||
-    (typeof this !== 'undefined' && this)
-);
-
-if (typeof root !== 'undefined') {
-    Object.assign(EmergencyKit.prototype, mixins.WebStream);
-    root.emergencyKit = emergencyKit;
-}
+export default create;

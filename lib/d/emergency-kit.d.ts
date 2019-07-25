@@ -12,14 +12,7 @@ interface EmergencyKit {
     toURL(): Promise<string>;
 }
 
-interface EmergencyKitStatic {
-    (config: EmergencyKitConfig): EmergencyKit
-}
-
-declare namespace _ek {
-    var emergencyKit: EmergencyKitStatic;
-}
-
 declare module "emergency-kit" {
-    export = _ek.emergencyKit;
+    export const create: (config: EmergencyKitConfig) => EmergencyKit;
+    export default create;
 }

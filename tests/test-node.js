@@ -1,8 +1,8 @@
 "use strict";
 
-let test = require("tape");
-let emergencyKit = require("../lib/emergency-kit-node.js");
-let fs = require("fs");
+const test = require("tape");
+const emergencyKit = require("../lib/emergency-kit-node.js");
+const fs = require("fs");
 
 function setup() {
     try {
@@ -15,25 +15,21 @@ function setup() {
         fs.unlinkSync(__dirname + "/output/1password.pdf");
     } catch (nofile) {}
 
-    let k = emergencyKit({
+    return emergencyKit.create({
         email: "wendyappleseed@me.com",
         name: "Wendy Appleseed",
         accountKey: "AK-123-456",
         domain: "appleseed",
         teamURL: "appleseed.1password.com",
-        //qrCode: image-data
     });
-    return k;
 }
 
 function runFileTests() {
-    test("'1password.pdf' file exists on disk and can be read.", (assert) => {
-            let expected = true;
-            fs.access(__dirname + '/output/1password.pdf', fs.R_OK, (err) => {
-                let actual = !err;
-                assert.equal(true, actual, actual);
-                assert.end();
-            });
+    test("'1password.pdf' file", (assert) => {
+        fs.access(__dirname + '/output/1password.pdf', fs.R_OK, (err) => {
+            assert.equal(!err, true, "should exist on disk and be readable");
+            assert.end();
+        });
     });
 }
 
